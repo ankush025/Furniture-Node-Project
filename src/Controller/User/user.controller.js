@@ -8,14 +8,16 @@ const userService = new UserServic();
 exports.registerUser = async (req, res) => {
     try {
       const {
-        firstName,
-        lastName,
+        fullName,
         email,
-        password,
         mobileNo,
+        password,
         profileImage,
         DOB,
         gender, 
+        country,
+        state,
+        city,
       } = req.body;
       // Checking Already Register or Not
       let user = await userService.findOneUser({ email: email, isDelete: false });
@@ -36,16 +38,18 @@ exports.registerUser = async (req, res) => {
   
       // Create New User
       user = await userService.createUser({
-        firstName,
-        lastName,
+        fullName,
         email,
-        password: hashPassword,
         mobileNo,
+        password: hashPassword,
         profileImage: image ,
         DOB,
         gender,
+        country,
+        state,
+        city,
       });
-      // user.save();
+      // console.log(user);
       res.status(201).json(user);
     } catch (err) {
       console.log(err);
@@ -65,7 +69,8 @@ exports.registerUser = async (req, res) => {
       if (!user) {
         return res.status(404).json({ message: "User Not Found" });
       }
-      let matchedPassword = await bcrypt.compare(password, user.password);
+      
+      let matchedPassword = await bcrypt.compare(password , user.password);
       // console.log(matchedPassword);
   
       if (!matchedPassword) {

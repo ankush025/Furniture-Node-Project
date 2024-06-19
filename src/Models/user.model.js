@@ -2,31 +2,37 @@ const mongoose = require('mongoose');
 
 const userSchema =mongoose.Schema(
     {
-        firstName:{
-            type: String,
-        },
-        lastName:{
+        fullName:{
             type: String,
         },
         email: {
             type :String,
             unique: true,
         },
-        password:{
-            type: String,
-        },
         mobileNo:{
             type: String,
         },
-        profileImage:{
+        password:{
             type: String,
         },
         DOB:{
             type: Date,
         },
+        profileImage:{
+            type: String,
+        },
         gender:{
             type: String,
             enum : ["Male", "Female"],
+        },
+        country:{
+            type: String,
+        },
+        state:{
+            type: String,
+        },
+        city: {
+            type: String,
         },
         isDelete:{
             type: Boolean,

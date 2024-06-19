@@ -11,14 +11,14 @@ const filePath = path.join(__dirname,'Public/Image');
 
 
 
-// Database Connection 
+// Database Connection ( DB )
 mongoose
     .connect(process.env.MONGO_URL)
     .then(() => console.log("DB is Connected..."))
     .catch((error) => console.log(error));
 
 
-
+//  Middleware
 
 server.use(cors()); 
 
@@ -26,9 +26,21 @@ server.use(express.json());
 server.use(morgan('dev'));                       // logger
 
 
+// Image Routes
 
-const userRoutes = require("./Routes/User/index.routes");
-server.use("api/users", userRoutes);
+server.use("/src/Public/image",express.static(filePath));
+
+
+
+// App Routes
+
+const appRoutes = require("./Routes/User/index.routes");
+server.use("/api/app", appRoutes);
+
+
+
+
+// Server
 
 server.listen(port,()=> {
     console.log('Server Start......');

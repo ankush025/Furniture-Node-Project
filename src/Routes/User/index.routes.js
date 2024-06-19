@@ -1,12 +1,14 @@
-const userRoutes = express.Router();
+const express = require("express");
+
+const appRoutes = express.Router();
 
 
-const user = require('./user.routes');
-
-
-
-userRoutes.use("/", user);
+const userRoute = require('./user.routes');
 
 
 
-module.exports = userRoutes;
+appRoutes.use("/user", userRoute);
+
+
+
+module.exports = appRoutes;
