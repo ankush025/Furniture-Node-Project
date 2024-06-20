@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
-const UserServic = require('../../Services/user.services');
+const UserServic = require('../../Service/user.service');
 const userService = new UserServic();
 
 
@@ -98,6 +98,19 @@ exports.registerUser = async (req, res) => {
   };
   
   
+
+  exports.getAllUser = async (req,res) => {
+    try {
+      const user = await userService.findAllUser({isDelete: false});
+      res.status(200).json(user);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+    
+};
+
+
   
   exports.updateProfile = async (req, res) => {
     try {

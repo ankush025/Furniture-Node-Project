@@ -8,6 +8,7 @@ const {
         registerUser,
         loginUser,
         getProfile,
+        getAllUser,
         updateProfile,
         changePassword,
         deleteUser
@@ -24,6 +25,8 @@ userRoutes.post("/register", upload.single('profileImage'), registerUser);
 userRoutes.post("/login", loginUser);
 
 userRoutes.get("/profile",verifyToken, getProfile);
+
+userRoutes.get("/allprofile",verifyToken, getAllUser);
 
 userRoutes.put("/update",verifyToken, updateProfile);
 

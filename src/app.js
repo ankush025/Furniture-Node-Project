@@ -40,6 +40,14 @@ server.use("/api/app", appRoutes);
 
 
 
+// Admin Routes
+
+const adminRoutes = require("./Routes/Admin/index.routes");
+server.use("/api/admin", adminRoutes);
+
+
+
+
 // Server
 
 server.listen(port,()=> {
