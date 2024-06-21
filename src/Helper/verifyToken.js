@@ -17,7 +17,7 @@ const veriftToken = async (req , res , next)=> {
         // console.log(userId);
 
         req.user = await User.findById(userId);
-        req.user ? next() : res.json({message: 'User Nt Found'});
+        req.user ? next() : res.json({message: 'User Not Found'});
 
     } catch (err) {
         console.log(err);
