@@ -15,7 +15,7 @@ exports.createShippingAdd = async (req, res) => {
   } = req.body;
 
   try {
-    const userId = req.user.id; // Assuming you have middleware to extract user ID from authentication
+    const userId = req.user.id; 
     const shippingAddressData = {
       productId,
       fullName,
