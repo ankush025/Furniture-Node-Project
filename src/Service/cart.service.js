@@ -132,19 +132,20 @@ module.exports = class CartServices {
 
   async updateCart(body, userID) {
     try {
-      let updateCart = await Cart.findOneAndUpdate(
-        {
-          user: userID,
-          isDelete: false,
-        },
-        {
-          $set: body,
-        },
-        {
-          new: true,
-        }
+      let userCarts = await Cart.findOne({ user: userID });
+      console.log(userCarts);
+      let findproductIndex = userCarts.products.findIndex(
+        (item) => String(item.productId) === body.productId
       );
-      return updateCart;
+      if (findproductIndex !== -1) {
+        userCarts.products[findproductIndex].quantity = body.quantity || 1;
+      } else {
+        userCarts.products.push({
+          productId: body.productId,
+          quantity: body.quantity || 1,
+        });
+      }
+      return await userCarts.save();
     } catch (err) {
       console.log(err);
       return err.message;
